@@ -21,10 +21,10 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: public.cakes; Type: TABLE; Schema: public; Owner: postgres
+-- Name: cakes; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public."public.cakes" (
+CREATE TABLE public.cakes (
     id integer NOT NULL,
     name character varying(100) NOT NULL,
     price numeric NOT NULL,
@@ -33,13 +33,13 @@ CREATE TABLE public."public.cakes" (
 );
 
 
-ALTER TABLE public."public.cakes" OWNER TO postgres;
+ALTER TABLE public.cakes OWNER TO postgres;
 
 --
--- Name: public.cakes_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: cakes_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public."public.cakes_id_seq"
+CREATE SEQUENCE public.cakes_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -48,20 +48,20 @@ CREATE SEQUENCE public."public.cakes_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public."public.cakes_id_seq" OWNER TO postgres;
+ALTER TABLE public.cakes_id_seq OWNER TO postgres;
 
 --
--- Name: public.cakes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: cakes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public."public.cakes_id_seq" OWNED BY public."public.cakes".id;
+ALTER SEQUENCE public.cakes_id_seq OWNED BY public.cakes.id;
 
 
 --
--- Name: public.clients; Type: TABLE; Schema: public; Owner: postgres
+-- Name: clients; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public."public.clients" (
+CREATE TABLE public.clients (
     id integer NOT NULL,
     name character varying(100) NOT NULL,
     adress character varying(200) NOT NULL,
@@ -69,13 +69,13 @@ CREATE TABLE public."public.clients" (
 );
 
 
-ALTER TABLE public."public.clients" OWNER TO postgres;
+ALTER TABLE public.clients OWNER TO postgres;
 
 --
--- Name: public.clients_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: clients_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public."public.clients_id_seq"
+CREATE SEQUENCE public.clients_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -84,20 +84,20 @@ CREATE SEQUENCE public."public.clients_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public."public.clients_id_seq" OWNER TO postgres;
+ALTER TABLE public.clients_id_seq OWNER TO postgres;
 
 --
--- Name: public.clients_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: clients_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public."public.clients_id_seq" OWNED BY public."public.clients".id;
+ALTER SEQUENCE public.clients_id_seq OWNED BY public.clients.id;
 
 
 --
--- Name: public.orders; Type: TABLE; Schema: public; Owner: postgres
+-- Name: orders; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public."public.orders" (
+CREATE TABLE public.orders (
     id integer NOT NULL,
     "clientId" integer NOT NULL,
     "cakeId" integer NOT NULL,
@@ -107,13 +107,13 @@ CREATE TABLE public."public.orders" (
 );
 
 
-ALTER TABLE public."public.orders" OWNER TO postgres;
+ALTER TABLE public.orders OWNER TO postgres;
 
 --
--- Name: public.orders_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public."public.orders_id_seq"
+CREATE SEQUENCE public.orders_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -122,105 +122,119 @@ CREATE SEQUENCE public."public.orders_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public."public.orders_id_seq" OWNER TO postgres;
+ALTER TABLE public.orders_id_seq OWNER TO postgres;
 
 --
--- Name: public.orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public."public.orders_id_seq" OWNED BY public."public.orders".id;
-
-
---
--- Name: public.cakes id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public."public.cakes" ALTER COLUMN id SET DEFAULT nextval('public."public.cakes_id_seq"'::regclass);
+ALTER SEQUENCE public.orders_id_seq OWNED BY public.orders.id;
 
 
 --
--- Name: public.clients id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: cakes id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."public.clients" ALTER COLUMN id SET DEFAULT nextval('public."public.clients_id_seq"'::regclass);
-
-
---
--- Name: public.orders id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public."public.orders" ALTER COLUMN id SET DEFAULT nextval('public."public.orders_id_seq"'::regclass);
+ALTER TABLE ONLY public.cakes ALTER COLUMN id SET DEFAULT nextval('public.cakes_id_seq'::regclass);
 
 
 --
--- Data for Name: public.cakes; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Name: clients id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-COPY public."public.cakes" (id, name, price, image, description) FROM stdin;
-1	cheese cake	12.99	https://vejario.abril.com.br/wp-content/uploads/2016/11/6406_17-receita-torta-de-amora-com-iogurte.jpeg	uma deliciosa cheese cake com cobertura de geleia de amoras e frutas vermelhas
-2	cheese cake	12.99	https://vejario.abril.com.br/wp-content/uploads/2016/11/6406_17-receita-torta-de-amora-com-iogurte.jpeg	uma deliciosa cheese cake com cobertura de geleia de amoras e frutas vermelhas
+ALTER TABLE ONLY public.clients ALTER COLUMN id SET DEFAULT nextval('public.clients_id_seq'::regclass);
+
+
+--
+-- Name: orders id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.orders ALTER COLUMN id SET DEFAULT nextval('public.orders_id_seq'::regclass);
+
+
+--
+-- Data for Name: cakes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.cakes (id, name, price, image, description) FROM stdin;
 \.
 
 
 --
--- Data for Name: public.clients; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: clients; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public."public.clients" (id, name, adress, phone) FROM stdin;
+COPY public.clients (id, name, adress, phone) FROM stdin;
 \.
 
 
 --
--- Data for Name: public.orders; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public."public.orders" (id, "clientId", "cakeId", quantity, "creatAt", "totalPrice") FROM stdin;
+COPY public.orders (id, "clientId", "cakeId", quantity, "creatAt", "totalPrice") FROM stdin;
 \.
 
 
 --
--- Name: public.cakes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: cakes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."public.cakes_id_seq"', 2, true);
-
-
---
--- Name: public.clients_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public."public.clients_id_seq"', 1, false);
+SELECT pg_catalog.setval('public.cakes_id_seq', 1, false);
 
 
 --
--- Name: public.orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: clients_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."public.orders_id_seq"', 1, false);
+SELECT pg_catalog.setval('public.clients_id_seq', 1, false);
 
 
 --
--- Name: public.cakes cakes_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."public.cakes"
+SELECT pg_catalog.setval('public.orders_id_seq', 1, false);
+
+
+--
+-- Name: cakes cakes_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cakes
     ADD CONSTRAINT cakes_pk PRIMARY KEY (id);
 
 
 --
--- Name: public.clients clients_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: clients clients_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."public.clients"
+ALTER TABLE ONLY public.clients
     ADD CONSTRAINT clients_pk PRIMARY KEY (id);
 
 
 --
--- Name: public.orders orders_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: orders orders_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."public.orders"
+ALTER TABLE ONLY public.orders
     ADD CONSTRAINT orders_pk PRIMARY KEY (id);
+
+
+--
+-- Name: orders orders_fk0; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.orders
+    ADD CONSTRAINT orders_fk0 FOREIGN KEY ("clientId") REFERENCES public.clients(id);
+
+
+--
+-- Name: orders orders_fk1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.orders
+    ADD CONSTRAINT orders_fk1 FOREIGN KEY ("cakeId") REFERENCES public.cakes(id);
 
 
 --

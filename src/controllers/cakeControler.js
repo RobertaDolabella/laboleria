@@ -1,9 +1,7 @@
-import bcrypt from "bcrypt";
-import { v4 as uuid } from "uuid";
-import usersRepository from "../repositories/clientRepository.js";
+import cakeRepository from "../repositories/cakesRepository.js";
 
-export async function createUser(req, res) {
-  const user = req.body;
+export async function postACake(req, res) {
+  const cake= req.body;
 
   try {
     const existingUsers = usersRepository.getUserByEmail(user.email);
