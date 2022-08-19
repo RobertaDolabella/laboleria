@@ -9,4 +9,5 @@ const clientRouter = Router();
 
 clientRouter.post("/clients", validateClientSchema(clientSchema), createClient)
 
+
 export default clientRouter;

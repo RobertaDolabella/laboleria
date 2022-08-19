@@ -8,20 +8,20 @@ export async function createOrder(req, res) {
 
         const { rows: client } = await orderRepositoy.findClient(clientId)
 
-        if (client.length === 0) {
-            res.sendStatus(404)
+        if (client.length<1) {
+           return res.send("Cliente informado não existe").status(404)
         }
 
 
         const { rows: cake } = await orderRepositoy.findCake(cakeId)
 
         if (cake.length === 0) {
-            res.sendStatus(404)
+           return res.send("Bolo informado não existe").status(404)
         }
 
         await orderRepositoy.createOrder(clientId, cakeId, quantity, totalPrice)
 
-        res.send("tudo certo")
+        res.sendStatus(201)
     } catch (error) {
         res.send(error.message)
     }
@@ -30,19 +30,25 @@ export async function createOrder(req, res) {
 
 export async function getOrder(req, res) {
 
+    const { id } = req.params
+
+    console.log(id)
+
     const orders = []
 
     try {
-        const { rows: allOrders } = await orderRepositoy.getOrder()
+        if(!id){
+
+            const { rows: allOrders } = await orderRepositoy.getOrder()
         console.log(allOrders)
 
         allOrders.map(order => {
 
-            const totalInfo = {
+            const totalInfo = [{
                 "client": {
                     id: order.clientId,
                     name: order.name,
-                    "address": order.adress,
+                    "address": order.address,
                     phone: order.phone
                 },
                 "cake": {
@@ -53,29 +59,94 @@ export async function getOrder(req, res) {
                     "image": order.image
                 },
 
-			"orderId": order.id,
-            "createdAt": order.createdAt,
-            "quantity": order.quantity,
-            "totalPrice": order.totalPrice
+                "orderId": order.id,
+                "createdAt": order.createAt,
+                "quantity": order.quantity,
+                "totalPrice": order.totalPrice
+            }]
+            orders.push(totalInfo)
+        })
+     }else{
+        const { rows: orderById } = await orderRepositoy.getOrderbyId(id)
+console.log("passou da query")
+        orderById.map(order => {
+
+            const totalInfo = {
+                "client": {
+                    id: order.clientId,
+                    name: order.name,
+                    "address": order.address,
+                    phone: order.phone
+                },
+                "cake": {
+                    "id": order.cakeId,
+                    "name": order.cakename,
+                    "price": order.price,
+                    "description": order.description,
+                    "image": order.image
+                },
+
+                "orderId": order.id,
+                "createdAt": order.createAt,
+                "quantity": order.quantity,
+                "totalPrice": order.totalPrice
             }
             orders.push(totalInfo)
         })
+     }
+        
 
-        res.send(orders)
+      return  res.send(orders)
     } catch {
         res.send("deu ruim")
     }
 
 }
 
+export async function getOrdersByclient(req, res) {
+
+    const { id } = req.params
+
+    console.log(id)
+
+    const orderList = []
+
+    try {
+
+        const {rows:client} = await orderRepositoy.findClient(id)
 
 
-// const {id}= req.params
+        if (client.length === 0) {
+            res.sendStatus(404)
+        }
 
-// console.log(id)
+        const { rows: ordersByClient } = await orderRepositoy.getOrderbyClient(id)
+
+        console.log(ordersByClient)
+
+        ordersByClient.map(orders => {
+
+            const order = {
+                "orderId": orders.id,
+                "quantity": orders.quantity,
+                "createdAt": orders.creatAt,
+                "totalPrice": orders.totalPrice,
+                "cakeName": orders.name
+            }
+            orderList.push(order)
+        })
+
+       return res.send(orderList).status(200)
+    } catch (error) {
+      return  res.send(error.message)
+    }
+}
+
+
 const order = {
     createOrder,
-    getOrder
+    getOrder, 
+    getOrdersByclient
 }
 
 export default order;

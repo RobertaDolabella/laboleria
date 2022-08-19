@@ -7,7 +7,7 @@ export function validateOrderSchema(schema) {
   
       if (error) {
         if( error.details.some(detail => detail.path.some(path => path =='quantity'))) {
-          return res.sendStatus(400)
+          return res.send("A quantidade excedeu a permitida").status(400)
         }
   
         return res.status(400).send(error.details.map(detail => detail.message));

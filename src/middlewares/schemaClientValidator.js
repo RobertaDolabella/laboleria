@@ -1,12 +1,12 @@
 export function validateClientSchema(clientSchema) {
     return (req, res, next) => {
   
-      const { error } = schema.validate(req.body, { abortEarly: false });
+      const { error } = clientSchema.validate(req.body, { abortEarly: false });
   
      
   
       if (error) {
-        if( error.details.some(detail => detail.path.some(path => path =='name'|| path=='adress' || path =='phone'))) {
+        if( error.details.some(detail => detail.path.some(path => path =='name'|| path=='address' || path =='phone'))) {
           return res.sendStatus(400)
         }
   
