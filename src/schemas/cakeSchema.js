@@ -1,9 +1,11 @@
 import joi from "joi";
 
+const regexUrl = /(https?:\/\/.*\.(?:png|jpg))/
+
 const cakeSchema= joi.object({
-  name: joi.string().required(),
-  price: joi.number().required(),
-  image:joi.string().required(),
+  name: joi.string().min(2).required(),
+  price: joi.number().positive().required(),
+  image:joi.string().pattern(regexUrl).required(),
   description:joi.string().required()
 });
 

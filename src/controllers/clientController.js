@@ -1,22 +1,26 @@
-import bcrypt from "bcrypt";
-import { v4 as uuid } from "uuid";
-import usersRepository from "../repositories/clientRepository.js";
+import clientRepository from "../repositories/clientRepository.js";
 
-export async function createUser(req, res) {
-  const user = req.body;
+
+
+export async function createClient(req, res) {
+  const {name, phone, adress}= req.body;
 
   try {
-    const existingUsers = usersRepository.getUserByEmail(user.email);
-    if (existingUsers.rowCount > 0) {
-      return res.status(409).send(error.message);
+    const {rows: existingClient} = await clientRepository.findClient(name,adress, phone);
+    console.log(existingClient)
+    if (existingClient.length>0) {
+      return res.status(409).send("Esse usuário já existe");
     }
 
-    const { username, email, password, pictureUrl } = user;
-
-    await usersRepository.createUser(username, email, password, pictureUrl);
+    await clientRepository.createClient(name, adress, phone);
     res.sendStatus(201);
   } catch (error) {
     console.log(error);
     return res.status(500).send(error.message);
   }
 }
+const client = {
+  createClient
+}
+
+export default client

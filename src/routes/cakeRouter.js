@@ -1,12 +1,12 @@
 import { Router } from "express";
 
 import { PostCake } from "../controllers/cakeControler.js";
-import { validateSchema } from "../middlewares/schemaValidator.js";
+import { validateCakeSchema } from "../middlewares/schemaCakeValidator.js";
 import cakeSchema from "../schemas/cakeSchema.js";
 
 const cakeRouter = Router();
 
-cakeRouter.post("/cakes", validateSchema(cakeSchema), PostCake);
+cakeRouter.post("/cakes", validateCakeSchema(cakeSchema), PostCake);
 // usersRouter.post("/", validateSchema(loginSchema), loginUser);
 // usersRouter.get("/users", getAllUsers);
 
