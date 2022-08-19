@@ -11,11 +11,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/grakzanchetta/linkr-back.git"
+    "url": "git+https://github.com/RobertaDolabella/laboleria"
   },
   "keywords": [
-    "Redes",
-    "sociais",
     "PostgreSQL",
     "Projetos",
     "Full",
@@ -23,10 +21,6 @@
   ],
   "author": "Roberta Dolabella",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/grakzanchetta/linkr-back/issues"
-  },
-  "homepage": "https://github.com/grakzanchetta/linkr-back#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
