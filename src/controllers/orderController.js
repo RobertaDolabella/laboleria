@@ -68,7 +68,7 @@ export async function getOrder(req, res) {
         })
      }else{
         const { rows: orderById } = await orderRepositoy.getOrderbyId(id)
-console.log("passou da query")
+
         orderById.map(order => {
 
             const totalInfo = {
