@@ -1,13 +1,12 @@
 import { Router } from "express";
-import userSchema from "../schemas/userSchema.js";
 
 import { validateSchema } from "../middlewares/schemaValidator.js";
-import loginSchema from "../schemas/loginSchema.js";
 
-const usersRouter = Router();
 
-usersRouter.post("/signup", validateSchema(userSchema), createUser);
-usersRouter.post("/", validateSchema(loginSchema), loginUser);
-usersRouter.get("/users", getAllUsers);
+const clientRouter = Router();
 
-export default usersRouter;
+// clientRouter.post("/signup", validateSchema(userSchema), createUser);
+// clientRouter.post("/", validateSchema(loginSchema), loginUser);
+// clientRouter.get("/users", getAllUsers);
+
+export default clientRouter;

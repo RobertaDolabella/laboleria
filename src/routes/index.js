@@ -1,10 +1,11 @@
 import { Router } from "express";
-
-import usersRouter from "./usersRouter.js";
+import clientRouter from "./clientRouter.js";
+import cakeRouter from "./cakeRouter.js";
 
 const router = Router();
 
-router.use(usersRouter);
+router.use(clientRouter);
+router.use(cakeRouter);
 
 
 
